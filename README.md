@@ -8,7 +8,6 @@ This repository contains the official frontend React application, built with Vit
 
 🌐 **Live App:** [tokena.meme](https://tokena.meme)  
 📦 **Tokena SDK:** [@tokena/sdk](https://www.npmjs.com/package/@tokena/sdk)  
-💬 **Twitter/X:** [@tokenapad](https://x.com/tokenapad)
 
 ## ✨ Features
 *   **Instant Token Creation:** Deploy ERC20 tokens directly to EVM chains via factory contracts.

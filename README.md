@@ -1,6 +1,6 @@
 # 🚀 Tokena Launchpad (Open Source Frontend)
 
-![Tokena Banner](https://tokena.meme/banner.png) <!-- Optional: Add a link to a cool banner image here -->
+![Tokena Banner](/banner.png) <!-- Optional: Add a link to a cool banner image here -->
 
 Tokena is a decentralized, open-source token launchpad that utilizes EVM bonding curves. It allows anyone to launch a token in seconds. Once a token reaches its bonding curve threshold, liquidity is automatically migrated and locked in a DEX router (like Uniswap or PancakeSwap).
 

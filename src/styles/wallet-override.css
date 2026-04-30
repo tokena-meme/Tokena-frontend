@@ -1,0 +1,49 @@
+/* Import AFTER wallet adapter styles */
+.wallet-adapter-modal-wrapper {
+  background: #0d0d0d !important;
+  border: 1px solid #1a1a1a !important;
+  border-radius: 16px !important;
+}
+
+.wallet-adapter-modal-title {
+  font-family: 'Fraunces', serif !important;
+  color: #ffffff !important;
+  font-size: 22px !important;
+}
+
+.wallet-adapter-button {
+  background: #111 !important;
+  border: 1px solid #1a1a1a !important;
+  border-radius: 8px !important;
+  font-family: 'Syne', sans-serif !important;
+  font-size: 13px !important;
+  letter-spacing: 0.5px !important;
+  transition: border-color 0.2s !important;
+}
+
+.wallet-adapter-button:hover {
+  background: #161616 !important;
+  border-color: rgba(245, 166, 35, 0.3) !important;
+}
+
+.wallet-adapter-modal-list-more {
+  color: #F5A623 !important;
+}
+
+.wallet-adapter-modal-middle-button {
+  background: linear-gradient(135deg, #F5A623, #FF6B35) !important;
+  color: #000 !important;
+  font-weight: 700 !important;
+}
+
+.wallet-adapter-modal-wrapper .wallet-adapter-modal {
+  background: #0d0d0d !important;
+}
+
+.wallet-adapter-modal-button-close {
+  background: #1a1a1a !important;
+}
+
+.wallet-adapter-modal-button-close:hover {
+  background: #222 !important;
+}

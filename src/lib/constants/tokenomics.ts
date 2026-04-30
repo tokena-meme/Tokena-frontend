@@ -1,0 +1,7 @@
+export const TOKENOMICS = {
+  TOTAL_SUPPLY: 1_000_000_000,
+  TOKEN_DECIMALS: 6,
+  INITIAL_LP_SOL: 5,
+  MIGRATION_LP_SOL: 25,
+  K: 5_000_000_000, // 5 × 1,000,000,000
+} as const;

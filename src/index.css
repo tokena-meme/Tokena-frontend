@@ -1,0 +1,273 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #080808;
+  --surface: #0d0d0d;
+  --surface-2: #111111;
+  --border: #1a1a1a;
+  --text: #ffffff;
+  --text-muted: #444444;
+  --accent: #F5A623;
+  --accent-2: #FF6B35;
+  --green: #00D4AA;
+  --red: #FF4444;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-display {
+  font-family: 'Fraunces', serif;
+}
+
+.font-mono {
+  font-family: 'DM Mono', monospace;
+}
+
+.font-ui {
+  font-family: 'Syne', sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #333;
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, #F5A623, #FF6B35);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glow effects */
+.glow-accent {
+  box-shadow: 0 0 20px rgba(245, 166, 35, 0.15);
+}
+
+.glow-green {
+  box-shadow: 0 0 20px rgba(0, 212, 170, 0.15);
+}
+
+/* Animations */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes slide-in-right {
+  from { transform: translateX(20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.animate-slide-in {
+  animation: slide-in-right 0.3s ease-out;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #111 25%, #1a1a1a 50%, #111 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Trade feed animations */
+.trade-entry {
+  animation: slide-in-right 0.25s ease-out;
+}
+
+/* Progress bar */
+.progress-bar {
+  background: linear-gradient(90deg, #F5A623, #FF6B35);
+  transition: width 0.5s ease;
+}
+
+.progress-bar-migrated {
+  background: linear-gradient(90deg, #00D4AA, #00a888);
+}
+
+/* Token card hover */
+.token-card {
+  transition: all 0.2s ease;
+  border: 1px solid var(--border);
+}
+
+.token-card:hover {
+  border-color: #2a2a2a;
+  transform: translateY(-1px);
+  background-color: #0f0f0f;
+}
+
+/* Input focus */
+.tokena-input {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  transition: border-color 0.15s ease;
+}
+
+.tokena-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* Button styles */
+.btn-primary {
+  background: linear-gradient(135deg, #F5A623, #FF6B35);
+  color: #000;
+  font-weight: 600;
+  font-family: 'Syne', sans-serif;
+  transition: all 0.15s ease;
+  border: none;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-secondary {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  transition: all 0.15s ease;
+}
+
+.btn-secondary:hover {
+  border-color: #2a2a2a;
+  background: #161616;
+}
+
+.btn-buy {
+  background: var(--green);
+  color: #000;
+  font-weight: 700;
+  transition: all 0.15s ease;
+}
+
+.btn-buy:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-buy:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+.btn-sell {
+  background: var(--red);
+  color: #fff;
+  font-weight: 700;
+  transition: all 0.15s ease;
+}
+
+.btn-sell:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-sell:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+/* ─── Social Profile Additions ─────────────────────────────── */
+
+/* Follow button pop animation */
+@keyframes follow-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.follow-btn {
+  animation: follow-pop 0.25s ease-out;
+}
+
+/* Comment slide in */
+@keyframes comment-slide-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.comment-slide-in {
+  animation: comment-slide-in 0.2s ease-out;
+}
+
+/* Profile avatar ring glow */
+.profile-avatar {
+  position: relative;
+}
+
+.profile-avatar::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #F5A623, #FF6B35);
+  z-index: -1;
+  opacity: 0.3;
+  filter: blur(6px);
+}
+
+/* Hide scrollbar utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Tab indicator slide */
+@keyframes tab-slide {
+  from { width: 0; }
+  to { width: 100%; }
+}
+

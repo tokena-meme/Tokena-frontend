@@ -1,0 +1,10 @@
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*.html"
+    [headers.values]
+    Cache-Control = "max-age=0"
+    X-Robots-Tag = "noindex"

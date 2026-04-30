@@ -1,0 +1,9 @@
+export const METEORA_DBC_PROGRAM_ID = 'dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN';
+export const MIGRATION_THRESHOLD_SOL = 25;
+export const PLATFORM_FEE_BPS = 40; // 0.4% platform share (half of 0.8% base fee)
+export const TOKEN_DECIMALS = 6;
+export const DEFAULT_TOTAL_SUPPLY = 1_000_000_000;
+export const CREATION_FEE_SOL = 0.01;
+export const TRADING_FEE_PCT = 0.01;
+export const DEFAULT_INITIAL_PRICE_SOL = 0.00000001;
+export const PLATFORM_FEE_WALLET = 'feeDwGK7o1wn57VUtbMqBAnc9UBLeeywUHNvqoqGuKW';

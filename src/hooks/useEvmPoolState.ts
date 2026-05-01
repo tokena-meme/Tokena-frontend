@@ -27,7 +27,7 @@ export function useEvmPoolState(tokenAddress: string | null, chainKey: string | 
       }
 
       if (isMounted) {
-        timer = setTimeout(poll, 10000); // 10s poll rate (same as Solana)
+        timer = setTimeout(poll, 30000); // 30s poll rate to avoid rate limits on free RPCs
       }
     }
 

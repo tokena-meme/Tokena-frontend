@@ -19,7 +19,7 @@ export const EVM_CHAINS: Record<string, EvmChainConfig> = {
     rpcUrl: 'https://eth.llamarpc.com',
     explorerUrl: 'https://etherscan.io',
     nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
-    factoryAddress: '0x3bF3A8384998B600acca63bc04fa251D617De059', // TokenFactory on ETH
+    factoryAddress: '0x153B33eee6412066f187B2146deEC10A3A4893C3', // TokenFactory on ETH
     visibleInUi: true, // Visible
   },
   bsc: {
@@ -29,7 +29,7 @@ export const EVM_CHAINS: Record<string, EvmChainConfig> = {
     rpcUrl: 'https://bsc-dataseed.binance.org',
     explorerUrl: 'https://bscscan.com',
     nativeCurrency: { name: 'BNB', symbol: 'BNB', decimals: 18 },
-    factoryAddress: '0x3bF3A8384998B600acca63bc04fa251D617De059', // TokenFactory on BSC
+    factoryAddress: '0x153B33eee6412066f187B2146deEC10A3A4893C3', // TokenFactory on BSC
     visibleInUi: true, // Visible
   },
   base: {
@@ -39,7 +39,7 @@ export const EVM_CHAINS: Record<string, EvmChainConfig> = {
     rpcUrl: 'https://mainnet.base.org',
     explorerUrl: 'https://basescan.org',
     nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
-    factoryAddress: '0x3bF3A8384998B600acca63bc04fa251D617De059', // TokenFactory on Base
+    factoryAddress: '0x153B33eee6412066f187B2146deEC10A3A4893C3', // TokenFactory on Base
     visibleInUi: true, // Visible
   },
   arbitrum: {
@@ -49,7 +49,7 @@ export const EVM_CHAINS: Record<string, EvmChainConfig> = {
     rpcUrl: 'https://arb1.arbitrum.io/rpc',
     explorerUrl: 'https://arbiscan.io',
     nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
-    factoryAddress: '0x3bF3A8384998B600acca63bc04fa251D617De059', // TokenFactory on Arbitrum
+    factoryAddress: '0x153B33eee6412066f187B2146deEC10A3A4893C3', // TokenFactory on Arbitrum
     visibleInUi: true, // Visible
   },
   sepolia: {
@@ -59,7 +59,7 @@ export const EVM_CHAINS: Record<string, EvmChainConfig> = {
     rpcUrl: 'https://ethereum-sepolia-rpc.publicnode.com',
     explorerUrl: 'https://sepolia.etherscan.io',
     nativeCurrency: { name: 'Sepolia ETH', symbol: 'ETH', decimals: 18 },
-    factoryAddress: '0x3bF3A8384998B600acca63bc04fa251D617De059', // TokenFactory on Sepolia
+    factoryAddress: '0x153B33eee6412066f187B2146deEC10A3A4893C3', // TokenFactory on Sepolia
     visibleInUi: false, // Hidden — testnet only
   },
 };

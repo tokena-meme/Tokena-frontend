@@ -29,6 +29,10 @@ export const BondingCurveABI = [
   'function paused() view returns (bool)',
   'function uniswapRouter() view returns (address)',
   'function uniswapPair() view returns (address)',
+  'function finalized() view returns (bool)',
+  'function migrationFeePercent() view returns (uint256)',
+  'function getAmmEthReserve() view returns (uint256)',
+  'function getMigrationStatus() view returns (bool _thresholdReached, bool _finalized, address _uniswapPair, uint256 _ammReserve, uint256 _ethThreshold, uint256 _migrationFeePercent)',
   'function taxInfo() view returns (address devWallet, uint8 devBuyFeePercent, uint8 devSellFeePercent, address marketingWallet, uint8 marketingBuyFeePercent, uint8 marketingSellFeePercent)',
   // Write functions
   'function buy(uint256 minTokens) payable',
@@ -46,6 +50,9 @@ export const BondingCurveABI = [
   'event FeesClaimed(address indexed wallet, uint256 amount)',
   'event ThresholdReached(uint256 totalEth)',
   'event LiquidityAdded(uint256 tokenAmount, uint256 ethAmount)',
+  'event AutoFinalized(address indexed pair, uint256 tokenAmount, uint256 ethAmount)',
+  'event MigrationGasRefunded(address indexed buyer, uint256 refundAmount)',
+  'event MigrationFeeTaken(uint256 feeAmount)',
   'event FeesUpdated(uint8 devBuyFee, uint8 devSellFee, uint8 marketingBuyFee, uint8 marketingSellFee)',
 ];
 

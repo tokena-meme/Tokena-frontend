@@ -108,7 +108,7 @@ export function TokenDetail() {
   // Use pool state for migration progress if available
   // On-chain solRaised comes from quoteReserve (actual SOL in the bonding curve)
   const nativeRaised = isEvm
-    ? (evmPoolState?.ethBalance ?? launch?.eth_raised ?? 0)
+    ? (evmPoolState?.ammEthReserve ?? evmPoolState?.ethBalance ?? launch?.eth_raised ?? 0)
     : (solPoolState?.solRaised ?? launch?.sol_raised ?? 0);
 
   // On-chain market cap from bonding curve (Solana only)
@@ -121,14 +121,17 @@ export function TokenDetail() {
     !isEvm ? (launch?.mint_address ?? null) : null
   );
 
-  const displayTrades = !isEvm && solOnChainTrades.length > 0 ? solOnChainTrades : recentTrades;
+  // For Solana: prefer on-chain trades. For EVM: use Supabase (BSC blocks eth_getLogs on free RPCs).
+  const displayTrades = !isEvm && solOnChainTrades.length > 0
+    ? solOnChainTrades
+    : recentTrades;
 
   const isMigrated = isEvm
-    ? (evmPoolState?.thresholdReached ?? launch?.is_migrated ?? false)
+    ? (evmPoolState?.finalized ?? launch?.is_migrated ?? false)
     : (solPoolState?.isMigrated ?? launch?.is_migrated ?? false);
 
   const threshold = isEvm 
-    ? (evmPoolState?.ethThreshold && evmPoolState.ethThreshold > 0 ? evmPoolState.ethThreshold : (launch?.migration_threshold_sol ?? 0.5))
+    ? (evmPoolState?.ethThreshold && evmPoolState.ethThreshold > 0 ? evmPoolState.ethThreshold : (launch?.eth_threshold ?? launch?.migration_threshold_sol ?? 5))
     : (launch?.migration_threshold_sol ?? 25);
 
   const migrationProgress = Math.min(100, Math.max(0, (nativeRaised / threshold) * 100));
@@ -142,9 +145,14 @@ export function TokenDetail() {
     : (solPoolState?.currentPrice ?? (recentTrades.length > 0 ? Number(recentTrades[0].price_per_token) : Number(launch?.initial_price_sol)));
 
   const liveMcapUsd = useMemo(() => {
-    if (isEvm) return (launch?.total_supply ?? 0) * (currentPrice ?? 0) * nativePriceUsd;
+    if (isEvm) {
+      // On-chain market cap: totalSupply × on-chain price × native USD price
+      const supply = evmPoolState?.totalSupply ?? launch?.total_supply ?? 0;
+      const price = evmPoolState?.currentPriceEth ?? currentPrice ?? 0;
+      return supply * price * nativePriceUsd;
+    }
     return onChainMcapUsd ?? getMcapUsd(nativeRaised, nativePriceUsd);
-  }, [isEvm, launch?.total_supply, currentPrice, nativePriceUsd, onChainMcapUsd, nativeRaised]);
+  }, [isEvm, evmPoolState?.totalSupply, evmPoolState?.currentPriceEth, launch?.total_supply, currentPrice, nativePriceUsd, onChainMcapUsd, nativeRaised]);
 
   if (loading) {
     return (
@@ -379,7 +387,7 @@ export function TokenDetail() {
           <div className={`${activeTab !== 'trades' ? 'hidden lg:block' : ''} bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl overflow-hidden mb-4`}>
             <div className="px-4 py-3 border-b border-[#111] flex items-center gap-2">
               <div className="w-1.5 h-1.5 rounded-full bg-[#00D4AA] animate-pulse-dot" />
-              <span className="text-sm font-semibold text-white font-ui">Live Trades (On-Chain)</span>
+              <span className="text-sm font-semibold text-white font-ui">Live Trades</span>
             </div>
             <LiveTradeFeed initialTrades={displayTrades} mintAddress={launch.mint_address} nativeSymbol={nativeSymbol} disableSupabase={!isEvm} />
           </div>
@@ -409,7 +417,7 @@ export function TokenDetail() {
                   <div className="flex justify-between text-xs font-mono">
                     <span className="text-[#555]">Market Cap</span>
                     <span className="text-[#888]">
-                      {formatMcapUsd(isEvm ? (launch.total_supply * currentPrice * nativePriceUsd) : (onChainMcapUsd ?? getMcapUsd(nativeRaised, nativePriceUsd)))}
+                      {formatMcapUsd(isEvm ? liveMcapUsd : (onChainMcapUsd ?? getMcapUsd(nativeRaised, nativePriceUsd)))}
                     </span>
                   </div>
                   <div className="flex justify-between text-xs font-mono">
@@ -492,7 +500,7 @@ export function TokenDetail() {
                 <div className="flex justify-between text-xs font-mono">
                   <span className="text-[#555]">Market Cap</span>
                   <span className="text-[#888]">
-                    {formatMcapUsd(isEvm ? (launch.total_supply * currentPrice * nativePriceUsd) : (onChainMcapUsd ?? getMcapUsd(nativeRaised, nativePriceUsd)))}
+                    {formatMcapUsd(isEvm ? liveMcapUsd : (onChainMcapUsd ?? getMcapUsd(nativeRaised, nativePriceUsd)))}
                   </span>
                 </div>
                 <div className="flex justify-between text-xs font-mono">

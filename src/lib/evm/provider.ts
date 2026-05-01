@@ -1,5 +1,5 @@
-import { JsonRpcProvider, BrowserProvider, JsonRpcSigner } from 'ethers';
-import { EVM_CHAINS, EvmChainConfig } from './constants';
+import { JsonRpcProvider, BrowserProvider, JsonRpcSigner, Network } from 'ethers';
+import { EVM_CHAINS } from './constants';
 
 // Read-only provider for a given chain
 const providerCache = new Map<string, JsonRpcProvider>();
@@ -10,11 +10,16 @@ export function getEvmProvider(chainKey: string): JsonRpcProvider {
   
   const config = EVM_CHAINS[chainKey];
   if (!config) throw new Error(`Unknown EVM chain: ${chainKey}`);
+
+  // Create a bare Network — do NOT use Network.from() which loads built-in Infura plugins
+  const network = new Network(config.name, config.chainId);
   
-  const provider = new JsonRpcProvider(config.rpcUrl, {
-    chainId: config.chainId,
-    name: config.name,
+  const provider = new JsonRpcProvider(config.rpcUrl, network, {
+    batchMaxCount: 1,       // No batching — prevents one failed method from poisoning others
+    staticNetwork: network, // Prevents _detectNetwork which redirects to built-in Infura endpoints
+    pollingInterval: 30000, // 30s polling to avoid rate limits on free RPCs
   });
+  
   providerCache.set(chainKey, provider);
   return provider;
 }

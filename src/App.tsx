@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
@@ -8,8 +9,17 @@ import { CreateToken } from './pages/CreateToken';
 import { Profile } from './pages/Profile';
 import { Docs } from './pages/Docs';
 import { GlobalTradeFeed } from './components/ui/GlobalTradeFeed';
+import { recoverPendingTrades } from './lib/evm/trade';
 
 export default function App() {
+  // On startup, recover any EVM trades that were confirmed on-chain
+  // but not yet recorded to Supabase (e.g. user closed browser during confirmation)
+  useEffect(() => {
+    recoverPendingTrades().catch(err =>
+      console.warn('[TradeRecovery] Recovery check failed:', err)
+    );
+  }, []);
+
   return (
     <BrowserRouter>
       <div className="min-h-screen bg-[#080808] flex flex-col">
